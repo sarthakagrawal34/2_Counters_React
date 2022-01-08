@@ -1,25 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./styles.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      counter: 0,
+      counter1: 0
+    };
+  }
+  increaseCounter = () => {
+    this.setState((prevState) => {
+      if (prevState.counter === 10)
+        return {
+          counter1: prevState.counter1 + 1
+        };
+      else
+        return {
+          counter: prevState.counter + 1,
+          counter1: prevState.counter1 + 1
+        };
+    });
+  };
+  handleSubmit = () => {
+    console.log(this.state);
+    this.increaseCounter();
+    // increaseCounter1();
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <h1>
+          {" "}
+          Counter: <span id="counter">{this.state.counter}</span>
+        </h1>
+        <h1>
+          {" "}
+          Counter1: <span id="counter1">{this.state.counter1}</span>{" "}
+        </h1>
+        <button
+          type="submit"
+          style={{ cursor: "pointer" }}
+          onClick={this.handleSubmit}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+          Play
+        </button>
+      </div>
+    );
+  }
 }
 
 export default App;
